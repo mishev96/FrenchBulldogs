@@ -1,0 +1,23 @@
+﻿<div class="index-div bg-blur border border-white">
+    <h1>French Bulldos for sale</h1>
+    <hr class="bg-primary w-75">
+    {{foreach}}
+    {
+    <div class="row mt-2 mb-4">
+        <div class="bulldog col-6 col-lg-3">
+            <img src="{{ImageUrl}}"
+                 class="bulldog-img-top img-fluid">
+            <div class="bulldog-body">
+                <h5 class="bulldog-title text-center" data-toggle="tooltip" data-placement="bottom"
+                    title="{{Description}}">
+                    "{{Name}}"
+                </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-center">{{Age}}</li>
+                    <li class="list-group-item">{{Color}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    }
+</div>

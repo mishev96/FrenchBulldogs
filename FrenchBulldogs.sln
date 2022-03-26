@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicWebServer.Server", "BasicWebServer.Server\BasicWebServer.Server.csproj", "{133CC06F-272A-4918-995D-6808D343022C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrenchBulldogs", "FrenchBulldogs\FrenchBulldogs.csproj", "{E38325AA-CA76-4B65-9182-FCAD555424CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{133CC06F-272A-4918-995D-6808D343022C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133CC06F-272A-4918-995D-6808D343022C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133CC06F-272A-4918-995D-6808D343022C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133CC06F-272A-4918-995D-6808D343022C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E38325AA-CA76-4B65-9182-FCAD555424CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E38325AA-CA76-4B65-9182-FCAD555424CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E38325AA-CA76-4B65-9182-FCAD555424CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E38325AA-CA76-4B65-9182-FCAD555424CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9570F3C8-289F-444B-B159-71A5C6C1E0CB}
+	EndGlobalSection
+EndGlobal
