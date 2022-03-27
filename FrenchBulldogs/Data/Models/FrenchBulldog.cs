@@ -18,10 +18,13 @@ namespace FrenchBulldogs.Data.Models
 
         [Required]
         [Range(0, 20)]
-        public int Age { get; set; }
+        public double Age { get; set; }
 
         [Required]
         public string Color { get; set; }
+
+        [Required]
+        public string Purpose { get; set; }
 
         [Required]
         [StringLength(200)]

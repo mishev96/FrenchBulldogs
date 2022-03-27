@@ -17,6 +17,9 @@ namespace FrenchBulldogs.Data.Models
         public string Email { get; set; }
 
         [Required]
+        public string Role { get; set; }
+
+        [Required]
         [StringLength(64)]
         public string Password { get; set; }
 

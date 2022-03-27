@@ -23,5 +23,10 @@ namespace FrenchBulldogs.Data
         public DbSet<FrenchBulldog> FrenchBulldogs { get; set; }
 
         public DbSet<UserFrenchBulldog> UserFrenchBulldogs { get; set; }
+        
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }
