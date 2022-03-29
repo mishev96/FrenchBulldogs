@@ -54,6 +54,7 @@ namespace FrenchBulldogs.Services
                 Email = model.Email,
                 Password = CalculateHash(model.Password),
                 Username = model.Username,
+                Role = model.Breeder ? "Breeder" : "User"
             };
 
             try
