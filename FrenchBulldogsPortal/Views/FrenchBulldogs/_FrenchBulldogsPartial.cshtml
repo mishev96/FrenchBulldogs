@@ -1,0 +1,21 @@
+﻿@model IEnumerable<FrenchBulldogServiceModel>
+
+<div class="row">
+    @foreach (var frenchBulldog in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@frenchBulldog.ImageUrl" alt="@frenchBulldog.Name @frenchBulldog.Color - @frenchBulldog.Age (@frenchBulldog.CategoryName)">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@frenchBulldog.Age  @frenchBulldog.Name @frenchBulldog.Color (@frenchBulldog.CategoryName)</h5>
+                    <a asp-controller="FrenchBulldogs" asp-action="Details" asp-route-id="@frenchBulldog.Id" asp-route-information="@frenchBulldog.GetInformation()" class="btn btn-primary">View</a>
+                    @if (ViewBag.AllowFrenchBulldogEdit == true || User.IsAdmin())
+                    {
+                        <a asp-controller="FrenchBulldogs" asp-action="Edit" asp-route-id="@frenchBulldog.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="FrenchBulldogs" asp-action="Delete" asp-route-id="@frenchBulldog.Id" class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

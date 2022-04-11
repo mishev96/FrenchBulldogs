@@ -1,0 +1,13 @@
+﻿@model IEnumerable<FrenchBulldogServiceModel>
+
+@{
+    ViewBag.Title = "My French Bulldogs";
+    ViewBag.AllowFrenchBulldogEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You do not have any french bulldogs yet!</h2>
+}
+
+<partial name="_FrenchBulldogsPartial" model="@Model" />
