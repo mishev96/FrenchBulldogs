@@ -24,7 +24,7 @@
             string imageUrl,
             int age,
             int categoryId,
-            int dealerId);
+            int breederId);
 
         bool Edit(
             int frenchBulldogId,
@@ -37,7 +37,7 @@
 
         IEnumerable<FrenchBulldogServiceModel> ByUser(string userId);
 
-        bool IsByDealer(int frenchBulldogId, int dealerId);
+        bool IsByBreeder(int frenchBulldogId, int breederId);
 
         void ChangeVisility(int frenchBulldogId);
 

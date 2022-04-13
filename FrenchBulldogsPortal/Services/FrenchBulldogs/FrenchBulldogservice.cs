@@ -78,7 +78,7 @@
                 .ProjectTo<FrenchBulldogDetailsServiceModel>(this.mapper)
                 .FirstOrDefault();
 
-        public int Create(string name, string color, string description, string imageUrl, int age, int categoryId, int dealerId)
+        public int Create(string name, string color, string description, string imageUrl, int age, int categoryId, int breederId)
         {
             var frenchBulldogData = new FrenchBulldog
             {
@@ -88,7 +88,7 @@
                 ImageUrl = imageUrl,
                 Age = age,
                 CategoryId = categoryId,
-                DealerId = dealerId,
+                BreederId = breederId,
             };
 
             this.data.FrenchBulldogs.Add(frenchBulldogData);
@@ -128,12 +128,12 @@
         public IEnumerable<FrenchBulldogServiceModel> ByUser(string userId)
             => GetFrenchBulldogs(this.data
                 .FrenchBulldogs
-                .Where(c => c.Dealer.UserId == userId));
+                .Where(c => c.Breeder.UserId == userId));
 
-        public bool IsByDealer(int frenchBulldogId, int dealerId)
+        public bool IsByBreeder(int frenchBulldogId, int breederId)
             => this.data
                 .FrenchBulldogs
-                .Any(c => c.Id == frenchBulldogId && c.DealerId == dealerId);
+                .Any(c => c.Id == frenchBulldogId && c.BreederId == breederId);
 
         public void ChangeVisility(int frenchBulldogId)
         {

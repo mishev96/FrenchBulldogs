@@ -29,8 +29,8 @@
         [Required]
         public string Description { get; set; }
 
-        public int DealerId { get; init; }
+        public int BreederId { get; init; }
 
-        public Dealer Dealer { get; init; }
+        public Breeder Breeder { get; init; }
     }
 }

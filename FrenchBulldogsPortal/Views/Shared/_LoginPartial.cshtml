@@ -3,16 +3,16 @@
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-@inject IDealerService Dealers
+@inject IBreederService Breeders
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         var userId = User.Id();
-        var userIsDealer = Dealers.IsDealer(userId);
+        var userIsBreeder = Breeders.IsBreeder(userId);
         var userIsAdmin = User.IsAdmin();
 
-        @if (userIsDealer && !userIsAdmin)
+        @if (userIsBreeder && !userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="FrenchBulldogs" asp-action="Mine">My FrenchBulldogs</a>
@@ -21,7 +21,7 @@
         else if (!userIsAdmin)
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Dealers" asp-action="Become">Become Dealer</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Breeders" asp-action="Become">Become Breeder</a>
             </li>
         }
         else if (userIsAdmin)

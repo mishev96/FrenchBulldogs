@@ -1,23 +1,23 @@
-﻿namespace FrenchBulldogsPortal.Services.Dealers
+﻿namespace FrenchBulldogsPortal.Services.Breeders
 {
     using System.Linq;
     using FrenchBulldogsPortal.Data;
 
-    public class DealerService : IDealerService
+    public class BreederService : IBreederService
     {
         private readonly FrenchBulldogsDbContext data;
 
-        public DealerService(FrenchBulldogsDbContext data) 
+        public BreederService(FrenchBulldogsDbContext data) 
             => this.data = data;
 
-        public bool IsDealer(string userId)
+        public bool IsBreeder(string userId)
             => this.data
-                .Dealers
+                .Breeders
                 .Any(d => d.UserId == userId);
 
         public int IdByUser(string userId)
             => this.data
-                .Dealers
+                .Breeders
                 .Where(d => d.UserId == userId)
                 .Select(d => d.Id)
                 .FirstOrDefault();

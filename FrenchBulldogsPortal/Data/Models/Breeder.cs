@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants.Dealer;
+    using static DataConstants.Breeder;
 
-    public class Dealer
+    public class Breeder
     {
         public int Id { get; init; }
          

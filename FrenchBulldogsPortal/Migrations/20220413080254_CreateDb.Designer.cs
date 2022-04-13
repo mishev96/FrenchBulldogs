@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FrenchBulldogsPortal.Migrations
 {
     [DbContext(typeof(FrenchBulldogsDbContext))]
-    [Migration("20220411135449_CreateDb")]
+    [Migration("20220413080254_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,24 +21,7 @@ namespace FrenchBulldogsPortal.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Dealer", b =>
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Breeder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +47,24 @@ namespace FrenchBulldogsPortal.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Dealers");
+                    b.ToTable("Breeders");
+                });
+
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.FrenchBulldog", b =>
@@ -77,15 +77,15 @@ namespace FrenchBulldogsPortal.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("BreederId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DealerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -102,9 +102,9 @@ namespace FrenchBulldogsPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("BreederId");
 
-                    b.HasIndex("DealerId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("FrenchBulldogs");
                 });
@@ -313,32 +313,32 @@ namespace FrenchBulldogsPortal.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Dealer", b =>
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Breeder", b =>
                 {
                     b.HasOne("FrenchBulldogsPortal.Data.Models.User", null)
                         .WithOne()
-                        .HasForeignKey("FrenchBulldogsPortal.Data.Models.Dealer", "UserId")
+                        .HasForeignKey("FrenchBulldogsPortal.Data.Models.Breeder", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.FrenchBulldog", b =>
                 {
+                    b.HasOne("FrenchBulldogsPortal.Data.Models.Breeder", "Breeder")
+                        .WithMany("FrenchBulldogs")
+                        .HasForeignKey("BreederId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("FrenchBulldogsPortal.Data.Models.Category", "Category")
                         .WithMany("FrenchBulldogs")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("FrenchBulldogsPortal.Data.Models.Dealer", "Dealer")
-                        .WithMany("FrenchBulldogs")
-                        .HasForeignKey("DealerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Navigation("Breeder");
 
                     b.Navigation("Category");
-
-                    b.Navigation("Dealer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -392,12 +392,12 @@ namespace FrenchBulldogsPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Category", b =>
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Breeder", b =>
                 {
                     b.Navigation("FrenchBulldogs");
                 });
 
-            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Dealer", b =>
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Category", b =>
                 {
                     b.Navigation("FrenchBulldogs");
                 });

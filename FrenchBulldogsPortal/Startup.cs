@@ -4,7 +4,7 @@ namespace FrenchBulldogsPortal
     using FrenchBulldogsPortal.Data;
     using FrenchBulldogsPortal.Data.Models;
     using FrenchBulldogsPortal.Infrastructure.Extensions;
-    using FrenchBulldogsPortal.Services.Dealers;
+    using FrenchBulldogsPortal.Services.Breeders;
 	using FrenchBulldogsPortal.Services.FrenchBulldogs;
 	using FrenchBulldogsPortal.Services.Statistics;
     using Microsoft.AspNetCore.Builder;
@@ -52,7 +52,7 @@ namespace FrenchBulldogsPortal
             });
 
             services.AddTransient<IFrenchBulldogService, FrenchBulldogservice>();
-            services.AddTransient<IDealerService, DealerService>();
+            services.AddTransient<IBreederService, BreederService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
         }
 

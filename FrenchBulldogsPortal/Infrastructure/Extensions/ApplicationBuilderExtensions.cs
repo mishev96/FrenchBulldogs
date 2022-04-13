@@ -46,7 +46,7 @@
 
             data.Categories.AddRange(new[]
             {
-                new Category { Name = "Breed" },
+                new Category { Name = "Sale" },
                 new Category { Name = "Stud" }
             });
 
@@ -70,7 +70,7 @@
 
                     await roleManager.CreateAsync(role);
 
-                    const string adminEmail = "admin@crs.com";
+                    const string adminEmail = "admin@breed.com";
                     const string adminPassword = "admin12";
 
                     var user = new User

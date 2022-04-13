@@ -167,7 +167,7 @@ namespace FrenchBulldogsPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dealers",
+                name: "Breeders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -178,9 +178,9 @@ namespace FrenchBulldogsPortal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dealers", x => x.Id);
+                    table.PrimaryKey("PK_Breeders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dealers_AspNetUsers_UserId",
+                        name: "FK_Breeders_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -199,21 +199,21 @@ namespace FrenchBulldogsPortal.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DealerId = table.Column<int>(type: "int", nullable: false)
+                    BreederId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FrenchBulldogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FrenchBulldogs_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_FrenchBulldogs_Breeders_BreederId",
+                        column: x => x.BreederId,
+                        principalTable: "Breeders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FrenchBulldogs_Dealers_DealerId",
-                        column: x => x.DealerId,
-                        principalTable: "Dealers",
+                        name: "FK_FrenchBulldogs_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -258,20 +258,20 @@ namespace FrenchBulldogsPortal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dealers_UserId",
-                table: "Dealers",
+                name: "IX_Breeders_UserId",
+                table: "Breeders",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FrenchBulldogs_BreederId",
+                table: "FrenchBulldogs",
+                column: "BreederId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FrenchBulldogs_CategoryId",
                 table: "FrenchBulldogs",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FrenchBulldogs_DealerId",
-                table: "FrenchBulldogs",
-                column: "DealerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -298,10 +298,10 @@ namespace FrenchBulldogsPortal.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Breeders");
 
             migrationBuilder.DropTable(
-                name: "Dealers");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

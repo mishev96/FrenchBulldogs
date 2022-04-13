@@ -15,7 +15,7 @@
 
         public DbSet<Category> Categories { get; init; }
 
-        public DbSet<Dealer> Dealers { get; init; }
+        public DbSet<Breeder> Breeders { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,16 +28,16 @@
 
             builder
                 .Entity<FrenchBulldog>()
-                .HasOne(c => c.Dealer)
+                .HasOne(c => c.Breeder)
                 .WithMany(d => d.FrenchBulldogs)
-                .HasForeignKey(c => c.DealerId)
+                .HasForeignKey(c => c.BreederId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .Entity<Dealer>()
+                .Entity<Breeder>()
                 .HasOne<User>()
                 .WithOne()
-                .HasForeignKey<Dealer>(d => d.UserId)
+                .HasForeignKey<Breeder>(d => d.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

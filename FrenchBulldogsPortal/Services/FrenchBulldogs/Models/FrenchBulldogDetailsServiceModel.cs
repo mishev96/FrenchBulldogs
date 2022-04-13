@@ -6,9 +6,9 @@
 
         public int CategoryId { get; init; }
 
-        public int DealerId { get; init; }
+        public int BreederId { get; init; }
 
-        public string DealerName { get; init; }
+        public string BreederName { get; init; }
 
         public string UserId { get; init; }
     }

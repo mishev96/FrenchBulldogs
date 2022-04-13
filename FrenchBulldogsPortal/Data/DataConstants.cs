@@ -23,7 +23,7 @@
             public const int NameMaxLength = 25;
         }
 
-        public class Dealer
+        public class Breeder
         {
             public const int NameMinLength = 2;
             public const int NameMaxLength = 25;

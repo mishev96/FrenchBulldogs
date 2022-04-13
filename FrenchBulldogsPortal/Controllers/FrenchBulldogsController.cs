@@ -4,7 +4,7 @@
     using FrenchBulldogsPortal.Infrastructure.Extensions;
     using FrenchBulldogsPortal.Models.FrenchBulldogs;
     using FrenchBulldogsPortal.Services.FrenchBulldogs;
-    using FrenchBulldogsPortal.Services.Dealers;
+    using FrenchBulldogsPortal.Services.Breeders;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -13,16 +13,16 @@
     public class FrenchBulldogsController : Controller
     {
         private readonly IFrenchBulldogService frenchBulldogs;
-        private readonly IDealerService dealers;
+        private readonly IBreederService breeders;
         private readonly IMapper mapper;
 
         public FrenchBulldogsController(
             IFrenchBulldogService frenchBulldogs,
-            IDealerService dealers, 
+            IBreederService breeders, 
             IMapper mapper)
         {
             this.frenchBulldogs = frenchBulldogs;
-            this.dealers = dealers;
+            this.breeders = breeders;
             this.mapper = mapper;
         }
 
@@ -67,9 +67,9 @@
         [Authorize]
         public IActionResult Add()
         {
-            if (!this.dealers.IsDealer(this.User.Id()))
+            if (!this.breeders.IsBreeder(this.User.Id()))
             {
-                return RedirectToAction(nameof(DealersController.Become), "Dealers");
+                return RedirectToAction(nameof(BreedersController.Become), "Breeders");
             }
 
             return View(new FrenchBulldogFormModel
@@ -82,11 +82,11 @@
         [Authorize]
         public IActionResult Add(FrenchBulldogFormModel frenchBulldog)
         {
-            var dealerId = this.dealers.IdByUser(this.User.Id());
+            var breederId = this.breeders.IdByUser(this.User.Id());
 
-            if (dealerId == 0)
+            if (breederId == 0)
             {
-                return RedirectToAction(nameof(DealersController.Become), "Dealers");
+                return RedirectToAction(nameof(BreedersController.Become), "Breeders");
             }
 
             if (!this.frenchBulldogs.CategoryExists(frenchBulldog.CategoryId))
@@ -108,7 +108,7 @@
                 frenchBulldog.ImageUrl,
                 frenchBulldog.Age,
                 frenchBulldog.CategoryId,
-                dealerId);
+                breederId);
 
             TempData[GlobalMessageKey] = "You frenchBulldog was added and is awaiting for approval!";
 
@@ -120,9 +120,9 @@
         {
             var userId = this.User.Id();
 
-            if (!this.dealers.IsDealer(userId) && !User.IsAdmin())
+            if (!this.breeders.IsBreeder(userId) && !User.IsAdmin())
             {
-                return RedirectToAction(nameof(DealersController.Become), "Dealers");
+                return RedirectToAction(nameof(BreedersController.Become), "Breeders");
             }
 
             var frenchBulldog = this.frenchBulldogs.Details(id);
@@ -143,11 +143,11 @@
         [Authorize]
         public IActionResult Edit(int id, FrenchBulldogFormModel frenchBulldog)
         {
-            var dealerId = this.dealers.IdByUser(this.User.Id());
+            var breederId = this.breeders.IdByUser(this.User.Id());
 
-            if (dealerId == 0 && !User.IsAdmin())
+            if (breederId == 0 && !User.IsAdmin())
             {
-                return RedirectToAction(nameof(DealersController.Become), "Dealers");
+                return RedirectToAction(nameof(BreedersController.Become), "Breeders");
             }
 
             if (!this.frenchBulldogs.CategoryExists(frenchBulldog.CategoryId))
@@ -162,7 +162,7 @@
                 return View(frenchBulldog);
             }
 
-            if (!this.frenchBulldogs.IsByDealer(id, dealerId) && !User.IsAdmin())
+            if (!this.frenchBulldogs.IsByBreeder(id, breederId) && !User.IsAdmin())
             {
                 return BadRequest();
             }

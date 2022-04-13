@@ -1,10 +1,10 @@
-﻿namespace FrenchBulldogsPortal.Models.Dealers
+﻿namespace FrenchBulldogsPortal.Models.Breeders
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.DataConstants.Dealer;
+    using static Data.DataConstants.Breeder;
 
-    public class BecomeDealerFormModel
+    public class BecomeBreederFormModel
     {
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]

@@ -18,7 +18,7 @@
                 .ForMember(c => c.CategoryName, cfg => cfg.MapFrom(c => c.Category.Name));
 
             this.CreateMap<FrenchBulldog, FrenchBulldogDetailsServiceModel>()
-                .ForMember(c => c.UserId, cfg => cfg.MapFrom(c => c.Dealer.UserId))
+                .ForMember(c => c.UserId, cfg => cfg.MapFrom(c => c.Breeder.UserId))
                 .ForMember(c => c.CategoryName, cfg => cfg.MapFrom(c => c.Category.Name));
         }
     }

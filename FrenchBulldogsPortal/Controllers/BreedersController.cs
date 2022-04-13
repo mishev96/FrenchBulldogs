@@ -4,17 +4,17 @@
     using FrenchBulldogsPortal.Data;
     using FrenchBulldogsPortal.Data.Models;
     using FrenchBulldogsPortal.Infrastructure.Extensions;
-    using FrenchBulldogsPortal.Models.Dealers;
+    using FrenchBulldogsPortal.Models.Breeders;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using static WebConstants;
 
-    public class DealersController : Controller
+    public class BreedersController : Controller
     {
         private readonly FrenchBulldogsDbContext data;
 
-        public DealersController(FrenchBulldogsDbContext data) 
+        public BreedersController(FrenchBulldogsDbContext data) 
             => this.data = data;
 
         [Authorize]
@@ -22,35 +22,35 @@
 
         [HttpPost]
         [Authorize]
-        public IActionResult Become(BecomeDealerFormModel dealer)
+        public IActionResult Become(BecomeBreederFormModel breeder)
         {
             var userId = this.User.Id();
 
-            var userIdAlreadyDealer = this.data
-                .Dealers
+            var userIdAlreadyBreeder = this.data
+                .Breeders
                 .Any(d => d.UserId == userId);
 
-            if (userIdAlreadyDealer)
+            if (userIdAlreadyBreeder)
             {
                 return BadRequest();
             }
 
             if (!ModelState.IsValid)
             {
-                return View(dealer);
+                return View(breeder);
             }
 
-            var dealerData = new Dealer
+            var breederData = new Breeder
             {
-                Name = dealer.Name,
-                PhoneNumber = dealer.PhoneNumber,
+                Name = breeder.Name,
+                PhoneNumber = breeder.PhoneNumber,
                 UserId = userId
             };
 
-            this.data.Dealers.Add(dealerData);
+            this.data.Breeders.Add(breederData);
             this.data.SaveChanges();
 
-            TempData[GlobalMessageKey] = "Thank you for becomming a dealer!";
+            TempData[GlobalMessageKey] = "Thank you for becomming a breeder!";
 
             return RedirectToAction(nameof(FrenchBulldogsController.All), "FrenchBulldogs");
         }
