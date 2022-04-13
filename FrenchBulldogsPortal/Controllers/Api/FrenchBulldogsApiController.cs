@@ -7,11 +7,11 @@
 
     [ApiController]
     [Route("api/frenchBulldogs")]
-    public class CarsApiController : ControllerBase
+    public class FrenchBulldogsApiController : ControllerBase
     {
         private readonly IFrenchBulldogService frenchBulldogs;
 
-        public CarsApiController(IFrenchBulldogService frenchBulldogs) 
+        public FrenchBulldogsApiController(IFrenchBulldogService frenchBulldogs) 
             => this.frenchBulldogs = frenchBulldogs;
 
         [HttpGet]
@@ -21,6 +21,6 @@
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
-                query.CarsPerPage);
+                query.FrenchBulldogsPerPage);
     }
 }

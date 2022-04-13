@@ -130,14 +130,14 @@
                 .FrenchBulldogs
                 .Where(c => c.Dealer.UserId == userId));
 
-        public bool IsByDealer(int carId, int dealerId)
+        public bool IsByDealer(int frenchBulldogId, int dealerId)
             => this.data
                 .FrenchBulldogs
-                .Any(c => c.Id == carId && c.DealerId == dealerId);
+                .Any(c => c.Id == frenchBulldogId && c.DealerId == dealerId);
 
-        public void ChangeVisility(int carId)
+        public void ChangeVisility(int frenchBulldogId)
         {
-            var car = this.data.FrenchBulldogs.Find(carId);
+            var frenchBulldog = this.data.FrenchBulldogs.Find(frenchBulldogId);
 
             this.data.SaveChanges();
         }

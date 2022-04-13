@@ -11,11 +11,11 @@
             string searchTerm = null,
             FrenchBulldogSorting sorting = FrenchBulldogSorting.DateCreated, 
             int currentPage = 1,
-            int carsPerPage = int.MaxValue);
+            int frenchBulldogsPerPage = int.MaxValue);
 
         IEnumerable<LatestFrenchBulldogServiceModel> Latest();
 
-        FrenchBulldogDetailsServiceModel Details(int carId);
+        FrenchBulldogDetailsServiceModel Details(int frenchBulldogId);
 
         int Create(
             string name,
@@ -27,7 +27,7 @@
             int dealerId);
 
         bool Edit(
-            int carId,
+            int frenchBulldogId,
             string name,
             string color,
             string description,
@@ -37,9 +37,9 @@
 
         IEnumerable<FrenchBulldogServiceModel> ByUser(string userId);
 
-        bool IsByDealer(int carId, int dealerId);
+        bool IsByDealer(int frenchBulldogId, int dealerId);
 
-        void ChangeVisility(int carId);
+        void ChangeVisility(int frenchBulldogId);
 
         IEnumerable<string> AllNames();
 

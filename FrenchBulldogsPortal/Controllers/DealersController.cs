@@ -52,7 +52,7 @@
 
             TempData[GlobalMessageKey] = "Thank you for becomming a dealer!";
 
-            return RedirectToAction(nameof(FrenchBulldogsController.All), "Cars");
+            return RedirectToAction(nameof(FrenchBulldogsController.All), "FrenchBulldogs");
         }
     }
 }

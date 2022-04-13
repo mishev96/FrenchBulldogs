@@ -11,11 +11,11 @@
 
         public IActionResult All()
         {
-            var cars = this.frenchBulldogs
+            var frenchBulldogs = this.frenchBulldogs
                 .All()
                 .FrenchBulldogs;
 
-            return View(cars);
+            return View(frenchBulldogs);
         }
 
         public IActionResult ChangeVisibility(int id)

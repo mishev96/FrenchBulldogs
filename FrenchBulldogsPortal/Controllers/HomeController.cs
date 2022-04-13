@@ -16,30 +16,30 @@
         private readonly IMemoryCache cache;
 
         public HomeController(
-            IFrenchBulldogService cars,
+            IFrenchBulldogService frenchBulldogs,
             IMemoryCache cache)
         {
-            this.frenchBulldogs = cars;
+            this.frenchBulldogs = frenchBulldogs;
             this.cache = cache;
         }
         
         public IActionResult Index()
         {
-            var latestCars = this.cache.Get<List<LatestFrenchBulldogServiceModel>>(LatestFrenchBulldogsCacheKey);
+            var latestFrenchBulldogs = this.cache.Get<List<LatestFrenchBulldogServiceModel>>(LatestFrenchBulldogsCacheKey);
 
-            if (latestCars == null)
+            if (latestFrenchBulldogs == null)
             {
-                latestCars = this.frenchBulldogs
+                latestFrenchBulldogs = this.frenchBulldogs
                    .Latest()
                    .ToList();
 
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
 
-                this.cache.Set(LatestFrenchBulldogsCacheKey, latestCars, cacheOptions);
+                this.cache.Set(LatestFrenchBulldogsCacheKey, latestFrenchBulldogs, cacheOptions);
             }
 
-            return View(latestCars);
+            return View(latestFrenchBulldogs);
         }
 
         public IActionResult Error() => View();
