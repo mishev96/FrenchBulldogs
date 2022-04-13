@@ -4,7 +4,7 @@
     {
         string Name { get; }
 
-        string Color { get; }
+        string ColorName { get; }
 
         int Age { get; }
     }

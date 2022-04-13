@@ -5,6 +5,6 @@
     public static class ModelExtensions
     {
         public static string GetInformation(this IFrenchBulldogModel frenchBulldog)
-            => frenchBulldog.Name + "-" + frenchBulldog.Color + "-" + frenchBulldog.Age;
+            => frenchBulldog.Name + "-" + frenchBulldog.ColorName + "-" + frenchBulldog.Age;
     }
 }

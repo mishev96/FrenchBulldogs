@@ -4,6 +4,8 @@
     {
         public string Description { get; init; }
 
+        public int ColorId { get; init; }
+
         public int CategoryId { get; init; }
 
         public int BreederId { get; init; }

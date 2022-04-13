@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FrenchBulldogsPortal.Migrations
 {
     [DbContext(typeof(FrenchBulldogsDbContext))]
-    [Migration("20220413080254_CreateDb")]
+    [Migration("20220413124124_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,22 @@ namespace FrenchBulldogsPortal.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colors");
+                });
+
             modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.FrenchBulldog", b =>
                 {
                     b.Property<int>("Id")
@@ -83,9 +99,8 @@ namespace FrenchBulldogsPortal.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -105,6 +120,8 @@ namespace FrenchBulldogsPortal.Migrations
                     b.HasIndex("BreederId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ColorId");
 
                     b.ToTable("FrenchBulldogs");
                 });
@@ -336,9 +353,17 @@ namespace FrenchBulldogsPortal.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("FrenchBulldogsPortal.Data.Models.Color", "Color")
+                        .WithMany("FrenchBulldogs")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Breeder");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Color");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -398,6 +423,11 @@ namespace FrenchBulldogsPortal.Migrations
                 });
 
             modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Category", b =>
+                {
+                    b.Navigation("FrenchBulldogs");
+                });
+
+            modelBuilder.Entity("FrenchBulldogsPortal.Data.Models.Color", b =>
                 {
                     b.Navigation("FrenchBulldogs");
                 });

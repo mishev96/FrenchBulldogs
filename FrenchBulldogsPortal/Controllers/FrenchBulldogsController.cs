@@ -9,8 +9,9 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static WebConstants;
+	using System.Linq;
 
-    public class FrenchBulldogsController : Controller
+	public class FrenchBulldogsController : Controller
     {
         private readonly IFrenchBulldogService frenchBulldogs;
         private readonly IBreederService breeders;
@@ -74,7 +75,8 @@
 
             return View(new FrenchBulldogFormModel
             {
-                Categories = this.frenchBulldogs.AllCategories()
+                Categories = this.frenchBulldogs.AllCategories(),
+                Colors = this.frenchBulldogs.AllColors()
             });
         }
 
@@ -94,24 +96,31 @@
                 this.ModelState.AddModelError(nameof(frenchBulldog.CategoryId), "Category does not exist.");
             }
 
+            if (!this.frenchBulldogs.ColorExists(frenchBulldog.ColorId))
+            {
+                this.ModelState.AddModelError(nameof(frenchBulldog.ColorId), "Color does not exist.");
+            }
+
             if (!ModelState.IsValid)
             {
                 frenchBulldog.Categories = this.frenchBulldogs.AllCategories();
+                frenchBulldog.Colors = this.frenchBulldogs.AllColors();
 
                 return View(frenchBulldog);
             }
 
             var frenchBulldogId = this.frenchBulldogs.Create(
                 frenchBulldog.Name,
-                frenchBulldog.Color,
+                frenchBulldog.ColorId,
                 frenchBulldog.Description,
                 frenchBulldog.ImageUrl,
                 frenchBulldog.Age,
                 frenchBulldog.CategoryId,
                 breederId);
 
+            frenchBulldog.ColorName = this.frenchBulldogs.GetColorById(frenchBulldog.ColorId);
             TempData[GlobalMessageKey] = "You frenchBulldog was added and is awaiting for approval!";
-
+            
             return RedirectToAction(nameof(Details), new { id = frenchBulldogId, information = frenchBulldog.GetInformation() });
         }
 
@@ -135,6 +144,7 @@
             var frenchBulldogForm = this.mapper.Map<FrenchBulldogFormModel>(frenchBulldog);
 
             frenchBulldogForm.Categories = this.frenchBulldogs.AllCategories();
+            frenchBulldogForm.Colors = this.frenchBulldogs.AllColors();
 
             return View(frenchBulldogForm);
         }
@@ -155,9 +165,15 @@
                 this.ModelState.AddModelError(nameof(frenchBulldog.CategoryId), "Category does not exist.");
             }
 
+            if (!this.frenchBulldogs.ColorExists(frenchBulldog.ColorId))
+            {
+                this.ModelState.AddModelError(nameof(frenchBulldog.ColorId), "Color does not exist.");
+            }
+
             if (!ModelState.IsValid)
             {
                 frenchBulldog.Categories = this.frenchBulldogs.AllCategories();
+                frenchBulldog.Colors = this.frenchBulldogs.AllColors();
 
                 return View(frenchBulldog);
             }
@@ -170,7 +186,7 @@
             var edited = this.frenchBulldogs.Edit(
                 id,
                 frenchBulldog.Name,
-                frenchBulldog.Color,
+                frenchBulldog.ColorId,
                 frenchBulldog.Description,
                 frenchBulldog.ImageUrl,
                 frenchBulldog.Age,

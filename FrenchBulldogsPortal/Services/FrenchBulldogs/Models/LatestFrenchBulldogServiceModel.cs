@@ -6,7 +6,7 @@
 
         public string Name { get; init; }
 
-        public string Color { get; init; }
+        public string ColorName { get; init; }
 
         public string ImageUrl { get; init; }
 

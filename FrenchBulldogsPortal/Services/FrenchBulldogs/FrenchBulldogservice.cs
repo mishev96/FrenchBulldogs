@@ -37,14 +37,14 @@
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 frenchBulldogsQuery = frenchBulldogsQuery.Where(c =>
-                    (c.Name + " " + c.Color).ToLower().Contains(searchTerm.ToLower()) ||
+                    (c.Name + " " + c.Color.Name).ToLower().Contains(searchTerm.ToLower()) ||
                     c.Description.ToLower().Contains(searchTerm.ToLower()));
             }
 
             frenchBulldogsQuery = sorting switch
             {
                 FrenchBulldogSorting.Age => frenchBulldogsQuery.OrderByDescending(c => c.Age),
-                FrenchBulldogSorting.NameAndColor => frenchBulldogsQuery.OrderBy(c => c.Name).ThenBy(c => c.Color),
+                FrenchBulldogSorting.NameAndColor => frenchBulldogsQuery.OrderBy(c => c.Name).ThenBy(c => c.Color.Name),
                 FrenchBulldogSorting.DateCreated or _ => frenchBulldogsQuery.OrderByDescending(c => c.Id)
             };
 
@@ -78,12 +78,12 @@
                 .ProjectTo<FrenchBulldogDetailsServiceModel>(this.mapper)
                 .FirstOrDefault();
 
-        public int Create(string name, string color, string description, string imageUrl, int age, int categoryId, int breederId)
+        public int Create(string name, int colorId, string description, string imageUrl, int age, int categoryId, int breederId)
         {
             var frenchBulldogData = new FrenchBulldog
             {
                 Name = name,
-                Color = color,
+                ColorId = colorId,
                 Description = description,
                 ImageUrl = imageUrl,
                 Age = age,
@@ -100,7 +100,7 @@
         public bool Edit(
             int id, 
             string name, 
-            string color, 
+            int colorId, 
             string description, 
             string imageUrl, 
             int age, 
@@ -114,7 +114,7 @@
             }
 
             frenchBulldogData.Name = name;
-            frenchBulldogData.Color = color;
+            frenchBulldogData.ColorId = colorId;
             frenchBulldogData.Description = description;
             frenchBulldogData.ImageUrl = imageUrl;
             frenchBulldogData.Age = age;
@@ -160,6 +160,23 @@
             => this.data
                 .Categories
                 .Any(c => c.Id == categoryId);
+
+        public IEnumerable<FrenchBulldogColorServiceModel> AllColors()
+            => this.data
+                .Colors
+                .ProjectTo<FrenchBulldogColorServiceModel>(this.mapper)
+                .ToList();
+
+        public bool ColorExists(int colorId)
+            => this.data
+                .Colors
+                .Any(c => c.Id == colorId);
+
+        public string GetColorById(int colorId)
+            => this.data
+        .Colors
+        .Where(c => c.Id == colorId)
+        .FirstOrDefault().Name;
 
         private IEnumerable<FrenchBulldogServiceModel> GetFrenchBulldogs(IQueryable<FrenchBulldog> frenchBulldogsQuery)
             => frenchBulldogsQuery

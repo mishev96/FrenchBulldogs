@@ -13,6 +13,8 @@
 
         public DbSet<FrenchBulldog> FrenchBulldogs { get; init; }
 
+        public DbSet<Color> Colors { get; init; }
+
         public DbSet<Category> Categories { get; init; }
 
         public DbSet<Breeder> Breeders { get; init; }
@@ -24,6 +26,13 @@
                 .HasOne(c => c.Category)
                 .WithMany(c => c.FrenchBulldogs)
                 .HasForeignKey(c => c.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<FrenchBulldog>()
+                .HasOne(c => c.Color)
+                .WithMany(c => c.FrenchBulldogs)
+                .HasForeignKey(c => c.ColorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

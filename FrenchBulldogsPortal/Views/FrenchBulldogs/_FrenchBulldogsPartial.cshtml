@@ -5,9 +5,9 @@
     {
         <div class="col-md-4">
             <div class="card mb-3">
-                <img class="card-img-top" src="@frenchBulldog.ImageUrl" alt="@frenchBulldog.Name @frenchBulldog.Color - @frenchBulldog.Age (@frenchBulldog.CategoryName)">
+                <img class="card-img-top" src="@frenchBulldog.ImageUrl" alt="@frenchBulldog.Name @frenchBulldog.ColorName - @frenchBulldog.Age (@frenchBulldog.CategoryName)">
                 <div class="card-body text-center">
-                    <h5 class="card-title text-center">@frenchBulldog.Age  @frenchBulldog.Name @frenchBulldog.Color (@frenchBulldog.CategoryName)</h5>
+                    <h5 class="card-title text-center">@frenchBulldog.Age  @frenchBulldog.Name @frenchBulldog.ColorName (@frenchBulldog.CategoryName)</h5>
                     <a asp-controller="FrenchBulldogs" asp-action="Details" asp-route-id="@frenchBulldog.Id" asp-route-information="@frenchBulldog.GetInformation()" class="btn btn-primary">View</a>
                     @if (ViewBag.AllowFrenchBulldogEdit == true || User.IsAdmin())
                     {

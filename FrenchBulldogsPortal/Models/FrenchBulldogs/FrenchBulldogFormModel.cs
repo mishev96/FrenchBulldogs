@@ -12,8 +12,10 @@
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         public string Name { get; init; }
 
-        [Required]
-        public string Color { get; init; }
+        [Display(Name = "Color")]
+        public int ColorId { get; init; }
+
+        public IEnumerable<FrenchBulldogColorServiceModel> Colors { get; set; }
 
         [Required]
         [StringLength(
@@ -33,5 +35,7 @@
         public int CategoryId { get; init; }
 
         public IEnumerable<FrenchBulldogCategoryServiceModel> Categories { get; set; }
-    }
+
+		public string ColorName { get; set; }
+	}
 }

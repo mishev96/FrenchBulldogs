@@ -61,6 +61,19 @@ namespace FrenchBulldogsPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Colors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Colors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -195,7 +208,7 @@ namespace FrenchBulldogsPortal.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ColorId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -214,6 +227,12 @@ namespace FrenchBulldogsPortal.Migrations
                         name: "FK_FrenchBulldogs_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FrenchBulldogs_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -272,6 +291,11 @@ namespace FrenchBulldogsPortal.Migrations
                 name: "IX_FrenchBulldogs_CategoryId",
                 table: "FrenchBulldogs",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FrenchBulldogs_ColorId",
+                table: "FrenchBulldogs",
+                column: "ColorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -302,6 +326,9 @@ namespace FrenchBulldogsPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Colors");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

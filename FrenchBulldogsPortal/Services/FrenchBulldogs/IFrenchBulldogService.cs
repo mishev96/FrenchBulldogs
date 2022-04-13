@@ -19,7 +19,7 @@
 
         int Create(
             string name,
-            string color,
+            int colorId,
             string description,
             string imageUrl,
             int age,
@@ -29,7 +29,7 @@
         bool Edit(
             int frenchBulldogId,
             string name,
-            string color,
+            int colorId,
             string description,
             string imageUrl,
             int age,
@@ -46,5 +46,11 @@
         IEnumerable<FrenchBulldogCategoryServiceModel> AllCategories();
 
         bool CategoryExists(int categoryId);
+
+        IEnumerable<FrenchBulldogColorServiceModel> AllColors();
+
+        bool ColorExists(int colorId);
+
+        string GetColorById(int colorId);
     }
 }

@@ -16,8 +16,9 @@
         [Range(1, 20)]
         public int Age { get; set; }
 
-        [Required]
-        public string Color { get; set; }
+        public int ColorId { get; set; }
+
+        public Color Color { get; set; }
 
         public int CategoryId { get; set; }
 
