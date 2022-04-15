@@ -30,5 +30,11 @@
             public const int PhoneNumberMinLength = 6;
             public const int PhoneNumberMaxLength = 30;
         }
+
+        public class News
+        {
+            public const int TitleMaxLength = 100;
+            public const int ContentMaxLength = 5000;
+        }
     }
 }
