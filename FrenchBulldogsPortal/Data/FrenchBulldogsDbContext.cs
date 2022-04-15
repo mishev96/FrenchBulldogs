@@ -19,6 +19,9 @@
 
         public DbSet<Breeder> Breeders { get; init; }
 
+        public DbSet<News> News { get; init; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
