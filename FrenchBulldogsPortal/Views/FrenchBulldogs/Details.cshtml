@@ -1,10 +1,11 @@
 ﻿@model FrenchBulldogDetailsServiceModel
 
-<div class="col-md-6 offset-3">
-    <h2>@Model.Name</h2>
-    <p>@Model.ColorName</p>
-    <p>@Model.Age</p>
-    <p>@Model.Description</p>
-    <p>@Model.CategoryName</p>
-    <p>@Model.BreederName</p>
+<div class="jumbotron">
+  <h1 class="display-4">Name: @Model.Name</h1>
+  <p class="lead">Color: @Model.ColorName, Age: @Model.Age</p>
+  <hr class="my-4">
+  <p>Description: @Model.Description</p>
+  <p class="lead">
+    For @Model.CategoryName, Breeder: @Model.BreederName
+  </p>
 </div>
