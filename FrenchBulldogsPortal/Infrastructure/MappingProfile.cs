@@ -4,6 +4,7 @@
     using FrenchBulldogsPortal.Data.Models;
     using FrenchBulldogsPortal.Models.FrenchBulldogs;
     using FrenchBulldogsPortal.Services.FrenchBulldogs.Models;
+    using FrenchBulldogsPortal.Services.News.Models;
 
     public class MappingProfile : Profile
     {
@@ -22,6 +23,8 @@
                 .ForMember(c => c.UserId, cfg => cfg.MapFrom(c => c.Breeder.UserId))
                 .ForMember(c => c.CategoryName, cfg => cfg.MapFrom(c => c.Category.Name))
                 .ForMember(c => c.ColorName, cfg => cfg.MapFrom(c => c.Color.Name));
+
+            this.CreateMap<News, NewsServiceModel>();
         }
     }
 }

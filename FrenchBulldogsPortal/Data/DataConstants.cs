@@ -33,6 +33,7 @@
 
         public class News
         {
+            public const int TitleMinLength = 2;
             public const int TitleMaxLength = 100;
             public const int ContentMaxLength = 5000;
         }
