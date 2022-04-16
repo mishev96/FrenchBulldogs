@@ -1,0 +1,23 @@
+﻿@using FrenchBulldogsPortal.Services.News.Models
+
+@model IEnumerable<NewsServiceModel>
+
+<div class="row">
+    @foreach (var news in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">       
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@news.Title</h5>
+                    <p>@news.Content.Substring(0, news.Content.IndexOf(" ", 50))</p>
+                    <a asp-controller="News" asp-action="Details" asp-route-id="@news.Id" asp-route-information="@news.GetNewsInformation()" class="btn btn-primary">View</a>
+                    @if (ViewBag.AllowNewsEdit == true || User.IsAdmin())
+                    {
+                        <a asp-controller="News" asp-action="Edit" asp-route-id="@news.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="News" asp-action="Delete" asp-route-id="@news.Id" class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
