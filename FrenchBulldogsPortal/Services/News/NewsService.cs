@@ -8,12 +8,12 @@
 	using FrenchBulldogsPortal.Data.Models;
 	using FrenchBulldogsPortal.Services.News.Models;
 
-	public class NewService : INewsService
+	public class NewsService : INewsService
 	{
 		private readonly FrenchBulldogsDbContext data;
 		private readonly IConfigurationProvider mapper;
 
-		public NewService(FrenchBulldogsDbContext data, IMapper mapper)
+		public NewsService(FrenchBulldogsDbContext data, IMapper mapper)
 		{
 			this.data = data;
 			this.mapper = mapper.ConfigurationProvider;

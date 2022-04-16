@@ -2,14 +2,9 @@
 {
     using AutoMapper;
     using FrenchBulldogsPortal.Infrastructure.Extensions;
-    using FrenchBulldogsPortal.Models.FrenchBulldogs;
-    using FrenchBulldogsPortal.Services.FrenchBulldogs;
-    using FrenchBulldogsPortal.Services.Breeders;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using static WebConstants;
-	using System.Linq;
 	using FrenchBulldogsPortal.Services.News;
 	using FrenchBulldogsPortal.Models.News;
 
